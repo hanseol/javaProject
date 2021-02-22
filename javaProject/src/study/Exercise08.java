@@ -8,7 +8,7 @@ public class Exercise08 {
 		
 		double z = x%y;
 		
-		if(Double.isNaN(x)) {
+		if(Double.isNaN(z)) {
 			System.out.println("0.0으로 나눌 수 없음.");
 		}else {
 			double result = z +10;
