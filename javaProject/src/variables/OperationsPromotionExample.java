@@ -5,16 +5,16 @@ public class OperationsPromotionExample {
 	public static void main(String[] args) {
 		byte byteValue1 = 10;
 		byte byteValue2 = 20;
-		//byte byteValue3 = byteValue1 + byteValue2; //ÄÄÆÄÀÏ ¿¡·¯
+		//byte byteValue3 = byteValue1 + byteValue2; //ì»´íŒŒì¼ ì—ëŸ¬
 		int intValue1 = byteValue1 + byteValue2;
 		System.out.println(intValue1);
 		
 		char charValue1 = 'A';
 		char charValue2 = 0;
-		//char charValue3 = charValue1 + charValue2 //ÄÄÆÄÀÏ ¿¡·¯
+		//char charValue3 = charValue1 + charValue2 //ì»´íŒŒì¼ ì—ëŸ¬
 		int intValue2 = charValue1 + charValue2;
-		System.out.println("À¯´ÏÄÚµå=" + intValue2);
-		System.out.println("Ãâ·Â¹®ÀÚ=" + (char)intValue2);
+		System.out.println("ìœ ë‹ˆì½”ë“œ=" + intValue2);
+		System.out.println("ì¶œë ¥ë¬¸ì=" + (char)intValue2);
 		
 		int intValue3 = 10;
 		int intValue4 = intValue3/4;

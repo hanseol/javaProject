@@ -12,20 +12,20 @@ public class StringEqualsExample {
 		System.out.println(str1.equals(str2));
 		System.out.println(str1.equals(str3));
 		
-		//³í¸®¿¬»êÀÚ 
+		//ë…¼ë¦¬ì—°ì‚°ì 
 		
 		int result = 8;
 		String str = "";
 		if(result%2==0) {
-			str="Â¦¼ö";
+			str="ì§ìˆ˜";
 			System.out.println(str);
 		}
 		else {
-			str = "È¦¼ö";
+			str = "í™€ìˆ˜";
 			System.out.println(str);
 		}
 		
-		str = (result%2==0) ? "Â¦¼ö" : "È¦¼ö";
+		str = (result%2==0) ? "ì§ìˆ˜" : "í™€ìˆ˜";
 		System.out.println(str);
 	}
 }

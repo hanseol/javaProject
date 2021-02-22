@@ -20,7 +20,7 @@ public class MethodExample {
 	}
 	
 	public static void printAge(int age) {
-		System.out.println("³ªÀÌ´Â : " + age + "ÀÔ´Ï´Ù.");
+		System.out.println("ë‚˜ì´ëŠ” : " + age + "ì…ë‹ˆë‹¤.");
 	}
 
 	public static int sum(int a, int b) {

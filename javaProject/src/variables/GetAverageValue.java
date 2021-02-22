@@ -8,7 +8,7 @@ public class GetAverageValue {
 		
 		double a = ((double)(num1+num2))/2;
 		
-		System.out.println("µÎ ¼öÀÇ Æò±ÕÀº : " + a);
+		System.out.println("ë‘ ìˆ˜ì˜ í‰ê· ì€ : " + a);
 	}
 
 }
