@@ -25,7 +25,7 @@ public class Exercise07_4 {
 			}else {
 				System.out.println("end of program");
 			}
-
-		}
-	}
+		} //end of while
+	 scn.close();
+	} //end of main
 }

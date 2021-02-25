@@ -3,28 +3,16 @@ package study;
 public class Exercise06_4 {
 
 	public static void main(String[] args) {
-		int lineNumber=1;
-		
-		for(int i=lineNumber; i<=5; i++) {
-			switch (lineNumber) {
-			case 1 :
-				System.out.println("*"); 
-				lineNumber++;
-			case 2 :
-				System.out.println("**"); 
-				lineNumber++;
-			case 3 :
-				System.out.println("***"); 
-				lineNumber++;
-			case 4 :
-				System.out.println("****"); 
-				lineNumber++;
-			case 5 :
-				System.out.println("*****"); 
-				lineNumber++;
-			}
-		}
+		exercise06();
+	}
 
+	public static void exercise06() {
+		for (int i = 1; i <= 5; i++) {
+			for (int j = 1; j <= i; j++) {
+				System.out.print("*");
+			}
+			System.out.println();
+		}
 	}
 
 }

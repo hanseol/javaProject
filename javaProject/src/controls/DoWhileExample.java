@@ -17,7 +17,7 @@ public class DoWhileExample {
 			System.out.println(">");
 			str = scn.nextLine();
 			System.out.println(">>>" + str);
-		} while (!str.equals("q")); //str == "q" (x)
+		} while (!str.equals("q")); //str == "q" (x) : String 클래스 변수는 참조 타입 변수
 
 //		do {
 //			System.out.println(">");
