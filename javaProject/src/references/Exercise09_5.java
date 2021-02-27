@@ -20,7 +20,7 @@ public class Exercise09_5 {
 				System.out.println();
 				continue;
 			}
-			if(selectNo==1) {
+			else if(selectNo==1) {
 				System.out.print("학생수 >");
 				studentNum=scn.nextInt();
 				scores = new int[studentNum];
