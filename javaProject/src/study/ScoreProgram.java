@@ -21,9 +21,10 @@ public class ScoreProgram {
 				System.out.println("이미 입력 했습니다.");
 				continue;
 			}else if(students==null && (menu==3 || menu==4 || menu==5 || menu==6 || menu==7)) {
-				System.out.println("입력된 점수가 없습니다.");
+				System.out.println("입력된 정보가 없습니다.");
 				continue;
 			}
+			
 			switch(menu) {
 			case 1 :
 				System.out.print("학생수 > ");
@@ -68,7 +69,7 @@ public class ScoreProgram {
 			}
 		} // end of while
 		scn.close();
-		System.out.println("프로그램 종료");
+		System.out.println("프로그램을 종료합니다.");
 	}
 
 	// 학생 번호에 따라 영어, 수학 점수를 저장.
@@ -114,8 +115,8 @@ public class ScoreProgram {
 
 		int max = 0, who = 0;
 		int sum[] = new int[stuNum];
-		for (int i = 0; i < stuNum; i++) { // 영어, 수학 점수 더하기.
-			for (int j = 1; j < 3; j++) {
+		for (int i = 0; i < stuNum; i++) { 
+			for (int j = 1; j < 3; j++) { //student[][1]: 영어점수 student[][2]:수학점수
 				sum[i] += students[i][j];
 			}
 			if (max < sum[i]) {
@@ -137,7 +138,7 @@ public class ScoreProgram {
 		System.out.println("평균 점수:" + avg);
 		for (int i = 0; i < stuNum; i++) {
 			if (avg <= students[i][2]) { 
-				System.out.println("학생번호: " + students[i][0] + "수학점수: " + students[i][2]);
+				System.out.println("학생번호: " + students[i][0] +", " + "수학점수: " + students[i][2]);
 			}
 		}
 	}
