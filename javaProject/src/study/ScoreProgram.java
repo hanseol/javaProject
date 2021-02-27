@@ -137,7 +137,7 @@ public class ScoreProgram {
 		System.out.println("평균 점수:" + avg);
 		for (int i = 0; i < stuNum; i++) {
 			if (avg <= students[i][2]) { 
-				System.out.println("학생번호: " + students[i][0] + "수학점수: " + students[i][2]);
+				System.out.println("학생번호: " + students[i][0] +", " + "수학점수: " + students[i][2]);
 			}
 		}
 	}
