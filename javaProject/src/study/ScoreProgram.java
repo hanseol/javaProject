@@ -24,7 +24,7 @@ public class ScoreProgram {
 				System.out.println("입력된 정보가 없습니다.");
 				continue;
 			}else if(studentNum==0 && menu==2) {
-				System.out.println("학생 수를 먼저 입력하세요.");
+				System.out.println("등록된 학생수가 없습니다.");
 				continue;
 			}
 			
