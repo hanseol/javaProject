@@ -7,7 +7,7 @@ public class ScoreProgram {
 	public static void main(String[] args) {
 		boolean run = true;
 		Scanner scn = new Scanner(System.in);
-		int[][] students = null;
+		int[][] students = null; //참조할 배열 객체가 없다면 배열 변수는 null 값으로 초기화 될 수 있다.
 		int studentNum = 0;
 
 		while (run) {
@@ -20,8 +20,11 @@ public class ScoreProgram {
 			if((studentNum!=0 && menu==1)||(students!=null && menu==2)) {
 				System.out.println("이미 입력 했습니다.");
 				continue;
-			}else if(students==null && (menu==3 || menu==4 || menu==5 || menu==6 || menu==7)) {
+			}else if(students==null && ( menu==3 || menu==4 || menu==5 || menu==6 || menu==7)) {
 				System.out.println("입력된 정보가 없습니다.");
+				continue;
+			}else if(studentNum==0 && menu==2) {
+				System.out.println("학생 수를 먼저 입력하세요.");
 				continue;
 			}
 			
@@ -43,13 +46,19 @@ public class ScoreProgram {
 			case 4 :
 				System.out.print("찾고자 하는 학생번호 입력> ");
 				int findNo = scn.nextInt();
+				int cnt =0;
 
 				for (int i = 0; i < studentNum; i++) {
 					if (findNo == students[i][0]) {
 						System.out.println("학생정보 - 번호:" + students[i][0] + ", " 
 											+ "영어:" + students[i][1] + ", " 
 											+ "수학:" + students[i][2]);
+						cnt++;
 					}
+				}
+				
+				if(cnt==0) {
+					System.out.println("일치하는 학생이 없습니다.");
 				}
 				break;
 			case 5 :
@@ -94,7 +103,7 @@ public class ScoreProgram {
 		return studentInfo;
 	}
 
-	//4. 영어점수가 가장 높은 학생번호,점수 출력
+	//영어점수가 가장 높은 학생번호,점수 출력
 	public static void highEngScore(int[][] students) {
 
 		int max = 0;
@@ -108,7 +117,7 @@ public class ScoreProgram {
 		System.out.println("영어최고점> 학생번호: " + who + ", 영어: " + max);
 	}
 
-	// 5. 합계점수가 가장 높은 학생번호, 평균 출력
+	//합계점수가 가장 높은 학생번호, 평균 출력
 	public static void sumEngMathScore(int[][] students) {
 
 		int stuNum = students.length;
@@ -127,7 +136,7 @@ public class ScoreProgram {
 		System.out.println("학생번호 : " + students[who][0] + " 평균점수: " + sum[who] / 2.0);
 	}
 
-	// 6. 수학점수가 수학평균점수 이상인 학생의 번호와 수학점수를 보여주도록 코드를 작성하세요.
+	//수학점수가 수학평균점수 이상인 학생의 번호와 수학점수를 보여주도록 코드를 작성하세요.
 	public static void aboveEverage(int[][] students) {
 		int stuNum = students.length;
 		int sum = 0;
