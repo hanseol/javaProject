@@ -7,7 +7,7 @@ public class ScoreProgram {
 	public static void main(String[] args) {
 		boolean run = true;
 		Scanner scn = new Scanner(System.in);
-		int[][] students = null; //참조할 배열 객체가 없다면 배열 변수는 null 값으로 초기화 될 수 있다.
+		int[][] students = null; 
 		int studentNum = 0;
 
 		while (run) {
