@@ -1,14 +1,11 @@
 package objects2;
 
 public class Book {
-	//private 책제목
-	//책 저저, 출판사, 금액
-	//get, set메소드
-	
-	String title;
-	String author;
-	String publisher;
-	int price;
+
+	private String title;
+	private String author;
+	private String publisher;
+	private int price;
 	
 	Book(){
 		
@@ -53,6 +50,9 @@ public class Book {
 		this.price = price;
 	}
 	
+	public void getBookInfo() {
+		System.out.println(" 제목:"+getTitle() + " |저자:"+ getAuthor() + " |출판사:"+getPublisher()+ " |가격:" + getPrice());
+	}
 	
 	
 }
