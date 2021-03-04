@@ -21,12 +21,8 @@ public class LibraryApplication {
 			int price;
 
 			if (menu == 1) {
-
-				
 				Book bookInfo = new Book() ;
-
 				System.out.println("<도서정보 입력> 제목 / 저자 / 출판사 / 가격 ");
-				Book bookInfo = new Book();
 
 				for (int i = 0; i < bookList.length; i++) {
 					System.out.println("책 제목, 저자, 출판사, 가격 입력");
