@@ -18,11 +18,11 @@ public class LibraryApplication {
 		
 		while (run) {
 			if (menu == 1) {
-				System.out.println("책 제목, 저자, 출판사, 가격 입력");
+				
 				Book bookInfo = new Book() ;
 				for (int i = 0; i < bookList.length; i++) {
+					System.out.println("책 제목, 저자, 출판사, 가격 입력");
 					if (bookList[i] == null) {
-						
 						title = scn.nextLine();
 						bookInfo.setTitle(title);
 						
@@ -36,6 +36,8 @@ public class LibraryApplication {
 						bookInfo.setPrice(price);
 						
 						bookList[i] = bookInfo;
+						
+						System.out.println(bookList[i].getAuthor());
 						break;
 					}
 				}
