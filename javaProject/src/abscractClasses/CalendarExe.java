@@ -38,19 +38,12 @@ public class CalendarExe {
 		
 		for (int i = 1; i < firstDay; i++) {
 			System.out.printf("%4s", " ");
-			cnt++;
-			
-			if(cnt==7) {
-				System.out.println();
-				cnt =0;
-			}
 		}
 		for (int i = 1; i <= lastDate; i++) {
 			System.out.printf("%4d", i);
-			cnt++;
-			if(cnt==7) {
+			
+			if(((firstDay+i)-1)%7==0) {
 				System.out.println();
-				cnt =0;
 			}
 			
 		}
