@@ -2,9 +2,6 @@ package abscractClasses;
 
 public class Bird extends Animal {
 
-	public Bird() {
-		
-	}
 	public Bird(String species) {
 		this.species = species;
 	}
