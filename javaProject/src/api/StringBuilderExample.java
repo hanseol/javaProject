@@ -32,7 +32,6 @@ public class StringBuilderExample {
 	}
 	
 	public static void PatternExample() {
-		String str = "\\d";
 		String regExp = "(02|010)-\\d{3,4}-\\d{4}";
 		String data = "010-123-4567";
 		boolean result = Pattern.matches(regExp, data);
