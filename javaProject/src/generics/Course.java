@@ -1,6 +1,5 @@
 package generics;
 
-
 class Person {
 	String name;// 필드
 

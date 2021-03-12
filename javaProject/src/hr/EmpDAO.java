@@ -4,6 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 public class EmpDAO {
@@ -44,6 +49,35 @@ public class EmpDAO {
 		System.out.println("메소드 호출 완료");
 		return departments;
 	}
+	
+
+	//컬렉션 실습 LIST
+	public List<Employee> getEmpList(){
+		String sql = "select * from emp_java";
+		List<Employee> list = new ArrayList<>(); //크기 자동 처리.
+		
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				Employee emp = new Employee();
+				emp.setEmployeeId(rs.getInt("employee_id"));
+				emp.setFirstName(rs.getString("first_name"));
+				emp.setLastName(rs.getString("last_name"));
+				emp.setSalary(rs.getInt("salary"));
+				list.add(emp);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(rs, stmt, conn); //oracle DB connection 종료.
+		}
+		
+		return list;
+	}
+	
 	
 	public Employee[] empList() {
 		PreparedStatement psmt = null;
