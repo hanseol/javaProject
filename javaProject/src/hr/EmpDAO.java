@@ -19,7 +19,7 @@ import java.util.Set;
 public class EmpDAO {
 	Connection conn = null;
 
-	public EmpDAO() {
+	public EmpDAO() { //생성자에서 db 연결
 		String path = "config/database.properties";
 		FileReader fr = null;
 		Properties prop = new Properties();
@@ -67,9 +67,9 @@ public class EmpDAO {
 
 	public Set<Employee> getEmps() {
 		String sql = "select * from emp_java";
+		Set<Employee> set = new HashSet<>();
 		Statement stmt = null;
 		ResultSet rs = null;
-		Set<Employee> set = new HashSet<>();
 		try {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
@@ -78,12 +78,16 @@ public class EmpDAO {
 				emp.setFirstName(rs.getString("first_name"));
 				emp.setLastName(rs.getString("last_name"));
 				emp.setEmployeeId(rs.getInt("employee_id"));
+				emp.setJobId(rs.getString("job_id"));
 				emp.setSalary(rs.getInt("salary"));
 				set.add(emp);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBUtil.close(rs, stmt, conn);
 		}
+
 
 		return set;
 	}
@@ -103,6 +107,7 @@ public class EmpDAO {
 				emp.setEmployeeId(rs.getInt("employee_id"));
 				emp.setFirstName(rs.getString("first_name"));
 				emp.setLastName(rs.getString("last_name"));
+				emp.setJobId(rs.getString("job_id"));
 				emp.setSalary(rs.getInt("salary"));
 				list.add(emp);
 			}
