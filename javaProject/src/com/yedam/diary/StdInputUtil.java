@@ -3,12 +3,14 @@ package com.yedam.diary;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.Scanner;
 
 public class StdInputUtil {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	static SimpleDateFormat df = new SimpleDateFormat("yyMMdd");
-
+	static SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+	
 	static int readInt() {
 		int result = 0;
 		String temp;
@@ -29,10 +31,24 @@ public class StdInputUtil {
 	// 날짜입력
 	public static String readDate() {
 		String result = "";
-
 		do {
 			try {
 				result = br.readLine(); // 입력값.
+				df.parse(result.trim()); // 사용자가 입력한 타입이 맞는지 확인.
+				break;
+			} catch (Exception e) {
+				System.out.println("날짜 형식이 맞지 않습니다.");
+			}
+		} while (true);
+
+		return result;
+	}
+	
+	public static String readInsertDate() {
+		String result = "";
+		do {
+			try {
+				result = df.format(new java.util.Date());
 				df.parse(result.trim()); // 사용자가 입력한 타입이 맞는지 확인.
 				break;
 			} catch (Exception e) {
@@ -46,11 +62,9 @@ public class StdInputUtil {
 	// 내용 (여러줄 입력)
 	public static String readMultiLine() {
 		StringBuffer result = new StringBuffer();
-		/*****/
 		try {
 			while (true) {
 				String temp = br.readLine();
-			
 				if(temp.equals("end")) {
 					break;
 				}
@@ -60,5 +74,14 @@ public class StdInputUtil {
 			e.printStackTrace();
 		}
 		return result.toString();
+	}
+	
+	//내용 (단어 검색)
+	public static String readWord() {
+		Scanner scn = new Scanner(System.in);
+		String word = scn.nextLine();
+		
+		return word;
+
 	}
 }

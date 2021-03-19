@@ -65,9 +65,9 @@ public class DiaryListDAO implements DAO{
 			if(list.get(i).getWdate().equals(vo.getWdate())) {
 				return 0;
 			}
-			//순서 정렬
+			//순서 정렬 - ??
 			if(list.get(i).getWdate().compareTo(vo.getWdate()) > 0) {
-				ii=i; //ii=0
+				ii=i; 
 				break;
 			}
 		}
@@ -105,12 +105,26 @@ public class DiaryListDAO implements DAO{
 
 	@Override
 	public DiaryVO selectDate(String date) {
+	
+		for(DiaryVO l : list) {
+			if(l.getWdate().equals(date)){
+				return l;
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public List<DiaryVO> selectContent(String content) {
-		return null;
+		List<DiaryVO> contents = new ArrayList<DiaryVO>();
+	
+		for(int i=0; i<list.size();i++) {
+			if(list.get(i).getContents().contains(content)) {
+				contents.add(list.get(i));
+			}
+		}
+		
+		return contents;
 	}
 
 	@Override
