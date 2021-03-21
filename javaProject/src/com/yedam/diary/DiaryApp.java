@@ -1,7 +1,6 @@
 
 package com.yedam.diary;
 
-import java.util.Date;
 import java.util.List;
 
 public class DiaryApp {
@@ -17,29 +16,31 @@ public class DiaryApp {
 			menuPrint();
 			menuNum = menuChoose();
 			process(menuNum);
-			
-		} while (menuNum != 0); //0 입력 : 프로그램 종료.
+		} while (menuNum != 0);
 	}
 
 	// 메뉴 출력
 	public void menuPrint() {
 		Menu[] arr = Menu.values();
+		System.out.println("-------------------------------------------------------");
 		for (Menu menu : arr) {
-			System.out.print(String.format("%d:%s", menu.ordinal(), menu.name())+" ");
+			System.out.print("|"+String.format("%d:%s", menu.ordinal(), menu.name())+" ");
 		}
 		System.out.println();
+		System.out.println("-------------------------------------------------------");
 	}
 
 	// 메뉴 선택
 	public int menuChoose() {
-		int menuSize = Menu.values().length-1;
-		int menuNum;// = StdInputUtil.readInt();
+		int menuSize = Menu.values().length;
+		int menuNum;
 		do {
 			menuNum = StdInputUtil.readInt();
-			if (menuNum <= menuSize)
+			if (menuNum >=0 && menuNum < menuSize) {
 				break;
-
-			System.out.println(menuSize + "까지만 입력이 가능합니다.");
+			}else {
+				System.out.println("0~"+ (menuSize-1) + "까지만 입력이 가능합니다.");
+			}
 		} while (true);
 		return menuNum;
 	}
@@ -67,13 +68,13 @@ public class DiaryApp {
 	
 	//종료
 	public void exit() {
-		System.out.println("종료선택>>");
+		DBUtil.close(null, null, null);
 		System.out.println("end of programm");
 	}
 	//입력
 	public void insert() {
-		System.out.println("입력선택>>");
-		System.out.println("내용:");
+		dao = new DiaryOracleDAO();
+		System.out.println("입력중>>");
 		String contents =StdInputUtil.readMultiLine();
 		DiaryVO vo = new DiaryVO();
 		vo.setContents(contents);
@@ -84,8 +85,8 @@ public class DiaryApp {
 	}
 	//수정
 	public void update() {
-		System.out.println("수정선택>>");
-		System.out.println("날짜:[yyyy/MM/dd hh:mm:ss]");
+		dao = new DiaryOracleDAO();
+		System.out.println("수정>>[yyyy/MM/dd hh:mm:ss] 형식에 맞추어 입력하세요.");
 		String wdate = StdInputUtil.readDate();
 		System.out.println("내용:");
 		DiaryVO vo = new DiaryVO();
@@ -96,8 +97,8 @@ public class DiaryApp {
 	}
 	//삭제
 	public void delete() {
-		System.out.println("삭제선택>>");
-		System.out.println("날짜:[yyyy/MM/dd hh:mm:ss]");
+		dao = new DiaryOracleDAO();
+		System.out.println("삭제>>[yyyy/MM/dd hh:mm:ss] 형식에 맞추어 입력하세요.");
 		String wdate = StdInputUtil.readDate();
 		int r = dao.delete(wdate);
 		System.out.println(r+"건 삭제 완료!");
@@ -105,24 +106,24 @@ public class DiaryApp {
 	
 	//내용검색
 	public void searchContent() {
-		System.out.println("내용검색>>");
-		//String word = StdInputUtil.readMultiLine();
+		dao = new DiaryOracleDAO();
+		System.out.println("검색>>찾고자 하는 단어를 입력하세요.");
 		String word = StdInputUtil.readWord();
 		List<DiaryVO> contents = dao.selectContent(word);
 		
-		for(int i=0;i<contents.size();i++) {
-			print(contents.get(i));
+		for(DiaryVO vo : contents) {
+			print(vo);
 		}
 	}
 	
 	//날짜검색
 	public void searchDate() {
-		System.out.println("날짜검색>>");
-		System.out.println("날짜:[yyyy/MM/dd hh:mm:ss]");
+		dao = new DiaryOracleDAO();
+		System.out.println("검색>>[yyyy/MM/dd hh:mm:ss] 형식에 맞추어 입력하세요.");
 		String wdate = StdInputUtil.readDate();
 		DiaryVO vo = dao.selectDate(wdate);
 		
-		if(vo!=null) {
+		if(vo.getWdate()!=null) {
 			print(vo);
 		}else {
 			System.out.println("해당 날짜에 작성된 글이 없습니다.");
@@ -131,15 +132,16 @@ public class DiaryApp {
 	
 	//전체조회
 	public void selectAll() {
+		System.out.println("전체 조회 중 ..");
+		dao = new DiaryOracleDAO();
 		for(DiaryVO vo : dao.selectAll()) {
 			print(vo);
 		}
 	}
 		
 	public void print(DiaryVO vo) {
-		System.out.println("-----------------------------");
-		System.out.println("날짜는 : " + vo.getWdate());
-		System.out.println("내용은 : " + vo.getContents());
+		System.out.println("<" + vo.getWdate() + ">");
+		System.out.print("  " + vo.getContents());
 	}
 	
 	

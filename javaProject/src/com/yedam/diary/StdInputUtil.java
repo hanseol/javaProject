@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class StdInputUtil {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	static SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+	static SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	
 	static int readInt() {
 		int result = 0;
@@ -33,8 +33,8 @@ public class StdInputUtil {
 		String result = "";
 		do {
 			try {
-				result = br.readLine(); // 입력값.
-				df.parse(result.trim()); // 사용자가 입력한 타입이 맞는지 확인.
+				result = br.readLine(); 
+				df.parse(result.trim()); 
 				break;
 			} catch (Exception e) {
 				System.out.println("날짜 형식이 맞지 않습니다.");
@@ -48,8 +48,8 @@ public class StdInputUtil {
 		String result = "";
 		do {
 			try {
-				result = df.format(new java.util.Date());
-				df.parse(result.trim()); // 사용자가 입력한 타입이 맞는지 확인.
+				result = df.format(new java.util.Date()); //글 등록 시, 시스템 날짜 사용.
+				df.parse(result.trim());
 				break;
 			} catch (Exception e) {
 				System.out.println("날짜 형식이 맞지 않습니다.");
@@ -76,10 +76,15 @@ public class StdInputUtil {
 		return result.toString();
 	}
 	
-	//내용 (단어 검색)
+	//내용 (특정 단어 검색)
 	public static String readWord() {
-		Scanner scn = new Scanner(System.in);
-		String word = scn.nextLine();
+		
+		String word="";
+		try {
+			word = br.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		return word;
 

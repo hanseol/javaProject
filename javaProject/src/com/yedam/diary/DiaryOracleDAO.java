@@ -40,15 +40,13 @@ public class DiaryOracleDAO implements DAO {
 	public int insert(DiaryVO vo) {
 		int r=0;
 		String sql = "insert into diary values(TO_DATE(" 
-		+ "'" + vo.getWdate() + "' ,'yyyy/mm/dd hh:mi:ss"
+		+ "'" + vo.getWdate() + "' ,'yyyy/mm/dd hh24:mi:ss"
 		+"'),'"+vo.getContents()+"')";
 		try {
 			stmt = conn.createStatement();
 			r = stmt.executeUpdate(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			//DBUtil.close(rs, stmt, conn);
 		}
 
 		return r;
@@ -56,9 +54,12 @@ public class DiaryOracleDAO implements DAO {
 
 	@Override
 	public void update(DiaryVO vo) {
-		String sql = "update diary set content = '"
-				+ vo.getContents() + "' where TO_CHAR(day,'yyyy/MM/dd hh:mi:ss') = '"
-				+ vo.getWdate() + "'";
+		String content = vo.getContents();
+		String date = vo.getWdate();
+		
+		String sql = "update diary set content = '"+ content + "',"
+				+ "day = TO_DATE('"+ StdInputUtil.readInsertDate()+"', 'yyyy/mm/dd hh24:mi:ss')"
+				+ "where TO_CHAR(day,'yyyy/MM/dd hh24:mi:ss') = '"+ date+ "'";
 		int r=0;
 		try {
 			stmt = conn.createStatement();
@@ -66,8 +67,6 @@ public class DiaryOracleDAO implements DAO {
 			System.out.println(r+"건 수정되었습니다.");
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			//DBUtil.close(rs, stmt, conn);
 		}
 		
 	}
@@ -75,7 +74,7 @@ public class DiaryOracleDAO implements DAO {
 	@Override
 	public int delete(String date) {
 		String sql = "delete from diary where day = TO_DATE('" 
-				+ date + "','yyyy/MM/dd hh:mi:ss')";
+				+ date + "','yyyy/MM/dd hh24:mi:ss')";
 		int r=0;
 		try {
 			stmt = conn.createStatement();
@@ -83,8 +82,6 @@ public class DiaryOracleDAO implements DAO {
 			System.out.println(r+"건 삭제되었습니다.");
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-		//	DBUtil.close(rs, stmt, conn);
 		}
 		
 		return r;
@@ -92,7 +89,7 @@ public class DiaryOracleDAO implements DAO {
 
 	@Override
 	public DiaryVO selectDate(String date) {
-		String sql = "select * from diary where TO_CHAR(day,'yyyy/MM/dd hh:mi:ss') = '" + date +"'";
+		String sql = "select * from diary where TO_CHAR(day,'yyyy/MM/dd hh24:mi:ss') = '" + date +"'";
 		DiaryVO diary = new DiaryVO();
 		try {
 			stmt = conn.createStatement();
@@ -103,21 +100,35 @@ public class DiaryOracleDAO implements DAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-		//	DBUtil.close(rs, stmt, conn);
 		}
 		return diary;
 	}
 
 	@Override
 	public List<DiaryVO> selectContent(String content) {
-		return null;
+		List<DiaryVO> vo = new ArrayList<>();
+		String sql = "select * from diary where content LIKE'%" + content +"%'";
+		
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				DiaryVO diary = new DiaryVO();
+				diary.setWdate(rs.getString("day"));
+				diary.setContents(rs.getString("content"));
+				vo.add(diary);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return vo;
 	}
 
 	@Override
 	public List<DiaryVO> selectAll() {
 		
-		String sql = "select TO_CHAR(day, 'yyyy/MM/dd hh:mi:ss') as day, content from diary order by day desc";
+		String sql = "select TO_CHAR(day, 'yyyy/MM/dd hh24:mi:ss') as day, content from diary order by day desc";
 		List<DiaryVO> list = new ArrayList<>();
 		
 		try {
@@ -131,8 +142,6 @@ public class DiaryOracleDAO implements DAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-		//	DBUtil.close(rs, stmt, conn);
 		}
 
 		return list;
