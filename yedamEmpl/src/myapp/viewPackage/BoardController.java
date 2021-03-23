@@ -46,18 +46,21 @@ public class BoardController implements Initializable {
 	@FXML
 	ComboBox<String> publicity;
 	@FXML
-	Button updateBtn, deleteBtn, exitBtn, addBtn;
+	Button updateBtn, deleteBtn, exitBtn, addBtn, previous, next;
 
 	private Stage primaryStage;
-	
+
 	public void setprimaryStage(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 	}
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+
 		deleteBtn.setOnAction(e -> deleteBtnAction(e));
-		addBtn.setOnAction(e-> addBtnAction(e));
+		addBtn.setOnAction(e -> addBtnAction(e));
+		previous.setOnAction(e-> previousBtnAction(e));
+		next.setOnAction(e-> nextBtnAction(e));
 		
 		ObservableList<BoardVO> list = InputDAO.boardList();
 
@@ -88,7 +91,7 @@ public class BoardController implements Initializable {
 		tableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<BoardVO>() {
 			@Override
 			public void changed(ObservableValue<? extends BoardVO> arg0, BoardVO oldValue, BoardVO newValue) {
-				if(newValue!=null) { //?
+				if (newValue != null) { // ?
 					boardNo.setText(String.valueOf(newValue.getBoardNo()));
 					title.setText(newValue.getTitle());
 					publicity.setValue(newValue.getPublicity());
@@ -99,13 +102,27 @@ public class BoardController implements Initializable {
 		});
 	}// end of initialize
 
+	public void previousBtnAction(ActionEvent e) {
+		tableView.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
+				tableView.getSelectionModel().select(arg2.intValue());
+				tableView.scrollTo(arg2.intValue());
+			}
+		});
+	}
+
+	public void nextBtnAction(ActionEvent e) {
+		
+	}
+
 	public void updateBtnAction(ActionEvent e) {
 		BoardVO vo = new BoardVO();
 		vo.setBoardNo(Integer.parseInt(boardNo.getText()));
 		vo.setContents(contents.getText());
 		vo.setExitDate(exitDate.getValue().toString());
 		vo.setPublicity(publicity.getValue());
-		
+
 		InputDAO.updateBoard(vo);
 		tableView.setItems(InputDAO.boardList());
 	}
@@ -125,50 +142,48 @@ public class BoardController implements Initializable {
 	public void exitBtnAction(ActionEvent e) {
 		Platform.exit();
 	}
-	
+
 	public void addBtnAction(ActionEvent e) {
 		Stage stage = new Stage(StageStyle.DECORATED);
 		stage.initModality(Modality.WINDOW_MODAL);
 		stage.initOwner(primaryStage);
-		
+
 		try {
 			AnchorPane ap = FXMLLoader.load(getClass().getResource("BoardAdd.fxml"));
 			Scene scene = new Scene(ap);
 			stage.setScene(scene);
 			stage.show();
-			
-			
+
 			Button btnReg = (Button) ap.lookup("#btnReg");
 			btnReg.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent arg0) {
 					InputBoardVO vo = new InputBoardVO();
-					
+
 					TextField txtTitle = (TextField) ap.lookup("#txtTitle");
-					PasswordField txtPassword = (PasswordField) ap.lookup("#txtPassword"); 
+					PasswordField txtPassword = (PasswordField) ap.lookup("#txtPassword");
 					ComboBox comboPublic = (ComboBox) ap.lookup("#comboPublic");
 					DatePicker dateExit = (DatePicker) ap.lookup("#dateExit");
 					TextArea txtContent = (TextArea) ap.lookup("#txtContent");
-					
+
 					vo.setTitle(txtTitle.getText());
 					vo.setPasswd(txtPassword.getText());
 					vo.setPublicity(comboPublic.getValue().toString());
 					vo.setExitDate(dateExit.getValue().toString());
 					vo.setContents(txtContent.getText());
-					
+
 					InputDAO.insertBoard(vo);
-					
+
 					tableView.setItems(InputDAO.boardList());
 					stage.close();
 				}
 			});
-			
+
 			Button btnCancel = (Button) ap.lookup("#btnCancel");
 			btnCancel.setOnAction(arg0 -> stage.close());
-			
+
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		
 	}
 }

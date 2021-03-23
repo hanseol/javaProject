@@ -39,10 +39,12 @@
          	</items>
          </ComboBox>
          <TextArea fx:id="contents" layoutX="32.0" layoutY="114.0" prefHeight="170.0" prefWidth="500.0" />
-         <Button fx:id="addBtn" layoutX="72.0" layoutY="296.0" text="추가" />
-         <Button fx:id="updateBtn" layoutX="193.0" layoutY="296.0" onAction="#updateBtnAction" text="수정" />
-         <Button fx:id="deleteBtn" layoutX="316.0" layoutY="296.0" text="삭제" />
-         <Button fx:id="exitBtn" layoutX="439.0" layoutY="296.0" onAction="#exitBtnAction" text="종료" />
+         <Button fx:id="addBtn" layoutX="165.0" layoutY="296.0" text="추가" />
+         <Button fx:id="updateBtn" layoutX="229.0" layoutY="296.0" onAction="#updateBtnAction" text="수정" />
+         <Button fx:id="deleteBtn" layoutX="288.0" layoutY="296.0" text="삭제" />
+         <Button fx:id="exitBtn" layoutX="348.0" layoutY="296.0" onAction="#exitBtnAction" text="종료" />
+         <Button fx:id="previous" layoutX="32.0" layoutY="296.0" text="전" />
+         <Button fx:id="next" layoutX="504.0" layoutY="296.0" text="후" />
 
       </children>
    </AnchorPane>
