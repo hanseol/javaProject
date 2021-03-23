@@ -28,4 +28,12 @@ public class Phone {
 		this.image.set(image);
 	}
 	
+	//Callback의 ObservableValue값을 위한 함수.
+	public SimpleStringProperty smartPhoneProperty() {
+		return smartPhone;
+	}
+	public SimpleStringProperty imageProperty() {
+		return image;
+	}
+	
 }
