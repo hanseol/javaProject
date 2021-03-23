@@ -11,7 +11,7 @@ public class FxmlApp extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
-		Parent root = FXMLLoader.load(getClass().getResource("AnchorPane.fxml")); //Label, Button
+		Parent root = FXMLLoader.load(getClass().getResource("viewPackage/Root.fxml")); //상대경로
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();

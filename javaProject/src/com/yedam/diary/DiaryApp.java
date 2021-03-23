@@ -1,4 +1,3 @@
-
 package com.yedam.diary;
 
 import java.util.List;
@@ -11,7 +10,6 @@ public class DiaryApp {
 		//dao = new DiaryListDAO();
 		dao = new DiaryOracleDAO();
 		int menuNum = 0;
-		
 		do {
 			menuPrint();
 			menuNum = menuChoose();
