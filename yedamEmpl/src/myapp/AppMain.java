@@ -1,4 +1,4 @@
-package myapp.score;
+package myapp;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -11,8 +11,8 @@ public class AppMain extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-//		
-//		FXMLLoader loader = new FXMLLoader(getClass().getResource("Root.fxml"));
+		
+//		FXMLLoader loader = new FXMLLoader(getClass().getResource("score/Board.fxml"));
 //		Parent root = loader.load();
 //		BoardController controller = loader.getController();
 //		controller.setprimaryStage(primaryStage);
@@ -20,7 +20,7 @@ public class AppMain extends Application {
 //		primaryStage.setScene(scene);
 //		primaryStage.show();
 		
-		Parent root = FXMLLoader.load(getClass().getResource("Root.fxml")); //상대경로
+		Parent root = FXMLLoader.load(getClass().getResource("score/Root.fxml")); //상대경로
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();

@@ -1,47 +1,73 @@
 package myapp.score;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 public class Student {
-	private String name;
-	private int korean;
-	private int math;
-	private int englihs;
+	private SimpleStringProperty name;
+	private SimpleIntegerProperty korean;
+	private SimpleIntegerProperty math;
+	private SimpleIntegerProperty english;
 	
 	public Student() {
-		
+		this.name=new SimpleStringProperty("");
+		this.korean=new SimpleIntegerProperty();
+		this.math=new SimpleIntegerProperty();
+		this.english=new SimpleIntegerProperty();
 	};
-	public Student(String name, int korean, int math, int englihs) {
-		this.name = name;
-		this.korean = korean;
-		this.math = math;
-		this.englihs = englihs;
+	
+	public Student(String name, int korean, int math, int english) {
+		this.name=new SimpleStringProperty(name);
+		this.korean=new SimpleIntegerProperty(korean);
+		this.math=new SimpleIntegerProperty(math);
+		this.english=new SimpleIntegerProperty(english);
 	}
-	public String getName() {
-		return name;
-	}
+	
 	public void setName(String name) {
-		this.name = name;
-	}
-	public int getKorean() {
-		return korean;
+		this.name.set(name);
 	}
 	public void setKorean(int korean) {
-		this.korean = korean;
-	}
-	public int getMath() {
-		return math;
+		this.korean.set(korean);
 	}
 	public void setMath(int math) {
-		this.math = math;
+		this.math.set(math);
 	}
-	public int getEnglihs() {
-		return englihs;
+	public void setEnglish(int english) {
+		this.english.set(english);
 	}
-	public void setEnglihs(int englihs) {
-		this.englihs = englihs;
+	
+	
+	public String getName() {
+		return name.get();
+	}
+	public int getKorean() {
+		return korean.get();
+	}
+	public int getMath() {
+		return math.get();
+	}
+	public int getEnglish() {
+		return english.get();
+	}
+	
+	public SimpleStringProperty nameProperty() {
+		return name;
+	}
+	public SimpleIntegerProperty koreanProperty() {
+		return korean;
+	}
+	public SimpleIntegerProperty mathProperty() {
+		return math;
+	}
+	public SimpleIntegerProperty englishProperty() {
+		return english;
 	}
 	@Override
 	public String toString() {
-		return "[name=" + name + ", korean=" + korean + ", math=" + math + ", englihs=" + englihs + "]";
+		return "Student [name=" + name + ", korean=" + korean + ", math=" + math + ", english=" + english + "]";
 	}
+	
+	
 	
 }

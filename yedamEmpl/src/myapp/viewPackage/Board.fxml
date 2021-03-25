@@ -12,7 +12,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myapp.viewPackage.BoardController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0"
+			xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
+			fx:controller="myapp.viewPackage.BoardController">
 	<TableView fx:id="tableView" layoutX="150.0" layoutY="40.0" prefHeight="170.0" prefWidth="500.0">
 		<columns>
 			<TableColumn prefWidth="80.0" text="게시번호" />
@@ -43,8 +45,8 @@
          <Button fx:id="updateBtn" layoutX="229.0" layoutY="296.0" onAction="#updateBtnAction" text="수정" />
          <Button fx:id="deleteBtn" layoutX="288.0" layoutY="296.0" text="삭제" />
          <Button fx:id="exitBtn" layoutX="348.0" layoutY="296.0" onAction="#exitBtnAction" text="종료" />
-         <Button fx:id="previous" layoutX="32.0" layoutY="296.0" text="전" />
-         <Button fx:id="next" layoutX="504.0" layoutY="296.0" text="후" />
+         <Button fx:id="prevBtn" layoutX="32.0" layoutY="296.0" text="전" />
+         <Button fx:id="nextBtn" layoutX="504.0" layoutY="296.0" text="후" />
 
       </children>
    </AnchorPane>

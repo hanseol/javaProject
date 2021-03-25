@@ -59,8 +59,8 @@ public class BoardController implements Initializable {
 
 		deleteBtn.setOnAction(e -> deleteBtnAction(e));
 		addBtn.setOnAction(e -> addBtnAction(e));
-		previous.setOnAction(e-> previousBtnAction(e));
-		next.setOnAction(e-> nextBtnAction(e));
+		//previous.setOnAction(e-> previousBtnAction(e));
+		//next.setOnAction(e-> nextBtnAction(e));
 		
 		ObservableList<BoardVO> list = InputDAO.boardList();
 
@@ -102,20 +102,6 @@ public class BoardController implements Initializable {
 		});
 	}// end of initialize
 
-	public void previousBtnAction(ActionEvent e) {
-		tableView.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-			@Override
-			public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
-				tableView.getSelectionModel().select(arg2.intValue());
-				tableView.scrollTo(arg2.intValue());
-			}
-		});
-	}
-
-	public void nextBtnAction(ActionEvent e) {
-		
-	}
-
 	public void updateBtnAction(ActionEvent e) {
 		BoardVO vo = new BoardVO();
 		vo.setBoardNo(Integer.parseInt(boardNo.getText()));
@@ -125,6 +111,12 @@ public class BoardController implements Initializable {
 
 		InputDAO.updateBoard(vo);
 		tableView.setItems(InputDAO.boardList());
+		
+		boardNo.clear();
+		title.setText("");
+		publicity.setValue("");
+		contents.setText("");
+		exitDate.setValue(LocalDate.now());
 	}
 
 	public void deleteBtnAction(ActionEvent e) {
@@ -185,5 +177,13 @@ public class BoardController implements Initializable {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+	}//end of addBtnAction
+	
+	public void previousBtnAction(ActionEvent e) {
+		
+	}
+
+	public void nextBtnAction(ActionEvent e) {
+		
 	}
 }

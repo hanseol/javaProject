@@ -21,9 +21,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import myapp.viewPackage.Phone;
 
 
 public class RootController implements Initializable {
+
 	@FXML TableView<Student> tableView;
 	@FXML Button addBtn;
 	@FXML TextField korean, math, english;
@@ -34,26 +36,25 @@ public class RootController implements Initializable {
 		this.primaryStage = primaryStage;
 	}
 	
-	ObservableList<Student> studentList = FXCollections.observableArrayList();
+	
+	ObservableList<Student> list = FXCollections.observableArrayList();
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		if(this.tableView!=null) {
-			TableColumn<Student, String> tcName = (TableColumn<Student, String>) tableView.getColumns().get(0);
-			tcName.setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
 
-			TableColumn<Student, Integer> tcKorean = (TableColumn<Student, Integer>) tableView.getColumns().get(1);
-			tcKorean.setCellValueFactory(new PropertyValueFactory<Student, Integer>("korean"));
-
-			TableColumn<Student, Integer> tcMath = (TableColumn<Student, Integer>) tableView.getColumns().get(2);
-			tcMath.setCellValueFactory(new PropertyValueFactory<Student, Integer>("math"));
-
-			TableColumn<Student, Integer> tcEnglish = (TableColumn<Student, Integer>) tableView.getColumns().get(3);
-			tcEnglish.setCellValueFactory(new PropertyValueFactory<Student, Integer>("english"));
-
-			tableView.setItems(studentList);
-			}
+	        TableColumn<Student, String> tcName = (TableColumn<Student,String>)tableView.getColumns().get(0);
+	        tcName.setCellValueFactory(new PropertyValueFactory<Student,String>("name"));
+			tcName.setStyle("-fx-alignment: CENTER;");
+			TableColumn<Student, Integer> tcKorean = (TableColumn<Student,Integer>)tableView.getColumns().get(1);
+			tcKorean.setCellValueFactory(new PropertyValueFactory<Student,Integer>("korean"));
+			tcKorean.setStyle("-fx-alignment: CENTER;");
+			TableColumn<Student, Integer> tcMath = (TableColumn<Student,Integer>)tableView.getColumns().get(2);
+			tcMath.setCellValueFactory(new PropertyValueFactory<Student,Integer>("math"));
+			tcMath.setStyle("-fx-alignment: CENTER;");
+			TableColumn<Student, Integer> tcEnglish = (TableColumn<Student,Integer>)tableView.getColumns().get(3);
+			tcEnglish.setCellValueFactory(new PropertyValueFactory<Student,Integer>("english"));
+			tcEnglish.setStyle("-fx-alignment: CENTER;");
+			
 	}
 
 	public void addBtnAction(ActionEvent e) {
@@ -72,22 +73,25 @@ public class RootController implements Initializable {
 				
 				@Override
 				public void handle(ActionEvent arg0) {
-					Student student = new Student();
 					
 					TextField txtName = (TextField) bp.lookup("#name");
 					TextField txtKorean = (TextField) bp.lookup("#korean");
 					TextField txtMath = (TextField) bp.lookup("#math");
 					TextField txtEnglish = (TextField) bp.lookup("#english");
-
 					
+//					Student student = new Student(txtName.getText(),
+//								Integer.parseInt(txtKorean.getText()),
+//								Integer.parseInt(txtMath.getText()),
+//								Integer.parseInt(txtEnglish.getText()));
+					
+					Student student = new Student();
 					student.setName(txtName.getText());
 					student.setKorean(Integer.parseInt(txtKorean.getText()));
 					student.setMath(Integer.parseInt(txtMath.getText()));
-					student.setEnglihs(Integer.parseInt(txtEnglish.getText()));
+					student.setEnglish(Integer.parseInt(txtEnglish.getText()));
 					
-					studentList.add(student);
-					System.out.println();
-					tableView.setItems(studentList);
+					list.add(student);
+					tableView.setItems(list);
 				}
 			});
 			

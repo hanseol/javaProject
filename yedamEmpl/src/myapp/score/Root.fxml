@@ -23,12 +23,12 @@
       </HBox>
    </bottom>
    <center>
-      <TableView prefHeight="244.0" prefWidth="388.0" BorderPane.alignment="CENTER">
+      <TableView  fx:id="tableView" prefHeight="244.0" prefWidth="388.0" BorderPane.alignment="CENTER">
         <columns>
             <TableColumn prefWidth="100.0" text="이름" />
             <TableColumn prefWidth="100.0" text="국어" />
           <TableColumn prefWidth="100.0" text="수학" />
-          <TableColumn minWidth="0.0" prefWidth="100.0" text="영어" />
+          <TableColumn prefWidth="100.0" text="영어" />
         </columns>
       </TableView>
    </center>
