@@ -69,7 +69,7 @@ public class RootController implements Initializable {
 
 			Button btnSave =(Button) bp.lookup("#btnSave");
 			btnSave.setOnAction(new EventHandler<ActionEvent>() {
-				//저장클릭시 윈도우의 TableView에 행이 추가되도록.
+				
 				@Override
 				public void handle(ActionEvent arg0) {
 					Student student = new Student();
