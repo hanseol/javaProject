@@ -11,19 +11,19 @@ public class AppMain extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("Root.fxml"));
-		Parent root = loader.load();
-		BoardController controller = loader.getController();
-		controller.setprimaryStage(primaryStage);
-		Scene scene = new Scene(root);
-		primaryStage.setScene(scene);
-		primaryStage.show();
-		
-//		Parent root = FXMLLoader.load(getClass().getResource("Root.fxml")); //상대경로
+//		
+//		FXMLLoader loader = new FXMLLoader(getClass().getResource("Root.fxml"));
+//		Parent root = loader.load();
+//		BoardController controller = loader.getController();
+//		controller.setprimaryStage(primaryStage);
 //		Scene scene = new Scene(root);
 //		primaryStage.setScene(scene);
 //		primaryStage.show();
+		
+		Parent root = FXMLLoader.load(getClass().getResource("Root.fxml")); //상대경로
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.show();
 		
 
 		
