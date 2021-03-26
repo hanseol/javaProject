@@ -7,23 +7,26 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-
-<BorderPane prefHeight="300.0" prefWidth="400.0" 
-	xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1"
-	fx:controller="myapp.score.RootController">
+<BorderPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/15.0.1" 
+				xmlns:fx="http://javafx.com/fxml/1" fx:controller="myapp.score.RootController">
    <bottom>
       <HBox prefHeight="56.0" prefWidth="400.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="addBtn" onAction="#addBtnAction" text="추가">
                <HBox.margin>
-                  <Insets bottom="10.0" left="170.0" top="15.0" />
+                  <Insets bottom="10.0" left="120.0" right="10.0" top="15.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="barchartBtn" onAction="#showBtnAction" text="학생별 막대그래프">
+               <HBox.margin>
+                  <Insets top="15.0" />
                </HBox.margin>
             </Button>
          </children>
       </HBox>
    </bottom>
    <center>
-      <TableView  fx:id="tableView" prefHeight="244.0" prefWidth="388.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="tableView" prefHeight="244.0" prefWidth="388.0" BorderPane.alignment="CENTER">
         <columns>
             <TableColumn prefWidth="100.0" text="이름" />
             <TableColumn prefWidth="100.0" text="국어" />
