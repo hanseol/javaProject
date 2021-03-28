@@ -13,19 +13,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class RootController implements Initializable {
-
 	@FXML
 	TableView<Student> tableView;
 	@FXML
@@ -33,16 +34,7 @@ public class RootController implements Initializable {
 	@FXML
 	TextField korean, math, english;
 
-	private Stage insertStage;
-	private Stage chartStage;
-
-	public void setinsertStage(Stage insertStage) {
-		this.insertStage = insertStage;
-	}
-
-	public void setchartStage(Stage chartStage) {
-		this.chartStage = chartStage;
-	}
+	private Stage insertStage,barchartStage,piechartStage;
 
 	ObservableList<Student> list = FXCollections.observableArrayList();
 
@@ -62,19 +54,49 @@ public class RootController implements Initializable {
 		tcEnglish.setCellValueFactory(new PropertyValueFactory<Student, Integer>("english"));
 		tcEnglish.setStyle("-fx-alignment: CENTER;");
 
+		tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				if(event.getClickCount()>1) {
+					Stage stage = new Stage(StageStyle.DECORATED);
+					stage.initModality(Modality.WINDOW_MODAL);
+					stage.initOwner(piechartStage);
+					
+					try {
+						BorderPane bp = FXMLLoader.load(getClass().getResource("Piechart.fxml"));
+						
+						PieChart pieChart = (PieChart) bp.lookup("#pieChart");
+						
+						pieChart.setData(FXCollections.observableArrayList(
+								new PieChart.Data("국어", tableView.getSelectionModel().getSelectedItem().getKorean()),
+								new PieChart.Data("수학", tableView.getSelectionModel().getSelectedItem().getMath()),
+								new PieChart.Data("영어", tableView.getSelectionModel().getSelectedItem().getEnglish())
+						));
+						
+						Button closeBtn = (Button) bp.lookup("#closeBtn");
+						closeBtn.setOnAction(e -> stage.close());
+						
+						Scene scene = new Scene(bp);
+						stage.setScene(scene);
+						stage.show();
+						
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
 	}
 
 	public void showBtnAction(ActionEvent event) {
 
 		Stage stage = new Stage(StageStyle.DECORATED);
 		stage.initModality(Modality.WINDOW_MODAL);
-		stage.initOwner(chartStage);
+		stage.initOwner(barchartStage);
 
 		try {
 			BorderPane bp = FXMLLoader.load(getClass().getResource("Barchart.fxml"));
-			Scene scene = new Scene(bp);
-			stage.setScene(scene);
-			stage.show();
+			
 
 			BarChart barChart = (BarChart) bp.lookup("#barChart");
 
@@ -106,16 +128,13 @@ public class RootController implements Initializable {
 			barChart.getData().add(series2);
 			barChart.getData().add(series3);
 			
+			Scene scene = new Scene(bp);
+			stage.setScene(scene);
+			stage.show();
+			
 			Button closeBtn = (Button) bp.lookup("#closeBtn");
-			closeBtn.setOnAction(new EventHandler<ActionEvent>() {
-
-				@Override
-				public void handle(ActionEvent arg0) {
-					stage.close();
-				}
-				
-			});
-
+			closeBtn.setOnAction(e -> stage.close());
+	
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

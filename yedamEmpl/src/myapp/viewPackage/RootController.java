@@ -44,6 +44,7 @@ public class RootController implements Initializable{
 
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				
 				tableView.getSelectionModel().select(newValue.intValue());
 				tableView.scrollTo(newValue.intValue());
 			}

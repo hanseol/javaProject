@@ -51,18 +51,6 @@ public class Student {
 		return english.get();
 	}
 	
-	public SimpleStringProperty nameProperty() {
-		return name;
-	}
-	public SimpleIntegerProperty koreanProperty() {
-		return korean;
-	}
-	public SimpleIntegerProperty mathProperty() {
-		return math;
-	}
-	public SimpleIntegerProperty englishProperty() {
-		return english;
-	}
 	@Override
 	public String toString() {
 		return "Student [name=" + name + ", korean=" + korean + ", math=" + math + ", english=" + english + "]";

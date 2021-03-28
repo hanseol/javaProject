@@ -46,8 +46,10 @@ public class BoardController implements Initializable {
 	@FXML
 	ComboBox<String> publicity;
 	@FXML
-	Button updateBtn, deleteBtn, exitBtn, addBtn, previous, next;
-
+	Button updateBtn, deleteBtn, exitBtn, addBtn, prevBtn, nextBtn;
+	
+	int index=0;
+	ObservableList<BoardVO> list = null;
 	private Stage primaryStage;
 
 	public void setprimaryStage(Stage primaryStage) {
@@ -59,10 +61,10 @@ public class BoardController implements Initializable {
 
 		deleteBtn.setOnAction(e -> deleteBtnAction(e));
 		addBtn.setOnAction(e -> addBtnAction(e));
-		//previous.setOnAction(e-> previousBtnAction(e));
-		//next.setOnAction(e-> nextBtnAction(e));
+		prevBtn.setOnAction(e-> previousBtnAction(e));
+		nextBtn.setOnAction(e-> nextBtnAction(e));
 		
-		ObservableList<BoardVO> list = InputDAO.boardList();
+		list = InputDAO.boardList();
 
 		TableColumn<BoardVO, Integer> tcBoardNo = (TableColumn<BoardVO, Integer>) tableView.getColumns().get(0);
 		tcBoardNo.setCellValueFactory(new PropertyValueFactory<BoardVO, Integer>("boardNo"));
@@ -91,12 +93,14 @@ public class BoardController implements Initializable {
 		tableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<BoardVO>() {
 			@Override
 			public void changed(ObservableValue<? extends BoardVO> arg0, BoardVO oldValue, BoardVO newValue) {
-				if (newValue != null) { // ?
+				if (newValue != null) { //?
 					boardNo.setText(String.valueOf(newValue.getBoardNo()));
 					title.setText(newValue.getTitle());
 					publicity.setValue(newValue.getPublicity());
 					contents.setText(newValue.getContents());
 					exitDate.setValue(LocalDate.parse(newValue.getExitDate()));
+					
+					index= tableView.getSelectionModel().getSelectedIndex();
 				}
 			}
 		});
@@ -110,7 +114,8 @@ public class BoardController implements Initializable {
 		vo.setPublicity(publicity.getValue());
 
 		InputDAO.updateBoard(vo);
-		tableView.setItems(InputDAO.boardList());
+		list=InputDAO.boardList();
+		tableView.setItems(list);
 		
 		boardNo.clear();
 		title.setText("");
@@ -122,7 +127,8 @@ public class BoardController implements Initializable {
 	public void deleteBtnAction(ActionEvent e) {
 		int no = Integer.parseInt(boardNo.getText());
 		InputDAO.deleteBoard(no);
-		tableView.setItems(InputDAO.boardList());
+		list=InputDAO.boardList();
+		tableView.setItems(list);
 
 		boardNo.clear();
 		title.setText("");
@@ -166,7 +172,8 @@ public class BoardController implements Initializable {
 
 					InputDAO.insertBoard(vo);
 
-					tableView.setItems(InputDAO.boardList());
+					list=InputDAO.boardList();
+					tableView.setItems(list);
 					stage.close();
 				}
 			});
@@ -180,10 +187,16 @@ public class BoardController implements Initializable {
 	}//end of addBtnAction
 	
 	public void previousBtnAction(ActionEvent e) {
-		
+		if(index>0 && index<list.size()) {
+			tableView.getSelectionModel().select(index-1);
+			tableView.scrollTo(index-1);
+		}
 	}
 
 	public void nextBtnAction(ActionEvent e) {
-		
+		if(index+1<list.size()) {
+			tableView.getSelectionModel().select(index+1);
+			tableView.scrollTo(index+1);
+		}
 	}
 }
